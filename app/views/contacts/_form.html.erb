@@ -1,0 +1,29 @@
+<%= form_with(model: contact, local: true)  do |f| %>
+  <%= render "layouts/message_form", content: @contact %>
+  <div  class="row">
+      <div class="col-sm-6">
+        <%= f.label :name %>
+        <%= f.text_field :name, id: :contact_name, class: "form-control" %>
+        <%= f.label :email %>
+        <%= f.text_field :email, id: :contact_email, class: "form-control" %>
+        <%= f.label :phone %>
+        <%= f.text_field :phone, id: :contact_phone, class: "form-control" %>
+        <%= f.label :description %>
+        <%= f.text_field :description, id: :contact_description, class: "form-control" %>
+      </div>
+      <div class="col-sm-6">
+        <%= f.fields_for :address_attributes, contact.address do |address_fields| %>
+          <%= address_fields.label :street %>
+          <%= address_fields.text_field :street, id: :contact_street, class: "form-control" %>
+          <%= address_fields.label :number %>
+          <%= address_fields.text_field :number, id: :contact_number, class: "form-control" %>
+          <%= address_fields.label :city %>
+          <%= address_fields.text_field :city, id: :contact_city, class: "form-control" %>
+          <%= address_fields.label :state %>
+          <%= address_fields.text_field :state, id: :contact_state, class: "form-control" %>
+        <% end %>
+      </div>
+  </div>
+  <br>
+  <%= f.submit 'Criar Contato', class: "btn-info pull-left" %>
+<% end %>
